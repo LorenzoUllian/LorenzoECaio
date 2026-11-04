@@ -74,9 +74,10 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
         if l < 0 or l > 9 or c < 0 or c > 9:
             return False
 
-        for navio in frota:
-            for lista_posicoes in frota[navio]:
-                for pos_ocupada in lista_posicoes: #esta linha está com um bug
-                    if pos_ocupada == [l, c]:
+    for navio in frota:
+        for lista_posicoes in frota[navio]:
+            for pos_existente in lista_posicoes:
+                for nova_pos in novas_posicoes:
+                    if pos_existente == nova_pos:
                         return False
-        return True
+    return True
