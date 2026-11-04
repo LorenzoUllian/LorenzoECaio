@@ -76,7 +76,7 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
 
         for navio in frota:
             for lista_posicoes in frota[navio]:
-                for pos_ocupada in lista_posicoes:
+                for pos_ocupada in lista_posicoes: #esta linha está com um bug
                     if pos_ocupada == [l, c]:
                         return False
-    return True
+        return True
