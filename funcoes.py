@@ -106,10 +106,10 @@ def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
 def posicao_valida(frota, linha, coluna, orientacao, tamanho):
     posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
     for posicao in posicoes:
-        # saiu do tabuleiro?
+        
         if posicao[0] < 0 or posicao[0] > 9 or posicao[1] < 0 or posicao[1] > 9:
             return False
-        # já tem navio nessa posição?
+        
         for nome in frota:
             for navio in frota[nome]:
                 if posicao in navio:
@@ -124,7 +124,6 @@ frota = {
     "submarino": [],
 }
 
-# nome: [tamanho, quantidade]
 navios = {
     "porta-aviões": [4, 1],
     "navio-tanque": [3, 2],
@@ -145,7 +144,7 @@ for nome in navios:
             coluna = int(input("Coluna: "))
 
             if nome == "submarino":
-                orientacao = "horizontal"  # ocupa 1 casa, tanto faz
+                orientacao = "horizontal"  
             else:
                 opcao = int(input("[1] Vertical [2] Horizontal >"))
                 if opcao == 1:
