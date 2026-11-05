@@ -1,3 +1,5 @@
+rom funcoes import define_posicoes, preenche_frota, posicao_valida
+
 frota = {
     "porta-aviões": [],
     "navio-tanque": [],
@@ -5,6 +7,7 @@ frota = {
     "submarino": [],
 }
 
+# nome: [tamanho, quantidade]
 navios = {
     "porta-aviões": [4, 1],
     "navio-tanque": [3, 2],
@@ -25,7 +28,7 @@ for nome in navios:
             coluna = int(input("Coluna: "))
 
             if nome == "submarino":
-                orientacao = "horizontal"  
+                orientacao = "horizontal"
             else:
                 opcao = int(input("[1] Vertical [2] Horizontal >"))
                 if opcao == 1:
