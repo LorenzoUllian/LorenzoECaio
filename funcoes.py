@@ -81,3 +81,84 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
                     if pos_existente == nova_pos:
                         return False
     return True
+
+def define_posicoes(linha, coluna, orientacao, tamanho):
+    posicoes = []
+    i = 0
+    while i < tamanho:
+        if orientacao == "vertical":
+            posicoes.append([linha + i, coluna])
+        else:
+            posicoes.append([linha, coluna + i])
+        i += 1
+    return posicoes
+
+
+def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
+    posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
+    if nome_navio in frota:
+        frota[nome_navio].append(posicoes)
+    else:
+        frota[nome_navio] = [posicoes]
+    return frota
+
+
+def posicao_valida(frota, linha, coluna, orientacao, tamanho):
+    posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
+    for posicao in posicoes:
+        # saiu do tabuleiro?
+        if posicao[0] < 0 or posicao[0] > 9 or posicao[1] < 0 or posicao[1] > 9:
+            return False
+        # já tem navio nessa posição?
+        for nome in frota:
+            for navio in frota[nome]:
+                if posicao in navio:
+                    return False
+    return True
+
+
+frota = {
+    "porta-aviões": [],
+    "navio-tanque": [],
+    "contratorpedeiro": [],
+    "submarino": [],
+}
+
+# nome: [tamanho, quantidade]
+navios = {
+    "porta-aviões": [4, 1],
+    "navio-tanque": [3, 2],
+    "contratorpedeiro": [2, 3],
+    "submarino": [1, 4],
+}
+
+for nome in navios:
+    tamanho = navios[nome][0]
+    quantidade = navios[nome][1]
+
+    i = 0
+    while i < quantidade:
+        valida = False
+        while not valida:
+            print("Insira as informações referentes ao navio", nome, "que possui tamanho", tamanho)
+            linha = int(input("Linha: "))
+            coluna = int(input("Coluna: "))
+
+            if nome == "submarino":
+                orientacao = "horizontal"  # ocupa 1 casa, tanto faz
+            else:
+                opcao = int(input("[1] Vertical [2] Horizontal >"))
+                if opcao == 1:
+                    orientacao = "vertical"
+                else:
+                    orientacao = "horizontal"
+
+            valida = posicao_valida(frota, linha, coluna, orientacao, tamanho)
+            if not valida:
+                print("Esta posição não está válida!")
+
+        frota = preenche_frota(frota, nome, linha, coluna, orientacao, tamanho)
+        i += 1
+
+print(frota)
+
