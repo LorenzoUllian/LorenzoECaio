@@ -1,4 +1,4 @@
-from funcoes import define_posicoes, preenche_frota, posicao_valida
+from funcoes import define_posicoes, preenche_frota, posicao_valida #importamos do arquivo funcoes.py
 
 frota = {
     "porta-aviões": [],
